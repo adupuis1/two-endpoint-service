@@ -1,0 +1,26 @@
+[project]
+name = "two-endpoint-service"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Anatole Dupuis", email = "anatole.dupuis@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi[standard]>=0.141.1",
+    "psycopg[binary]>=3.3.5",
+    "sqlmodel>=0.0.42",
+]
+
+[project.scripts]
+two-endpoint-service = "two_endpoint_service:main"
+
+[build-system]
+requires = ["uv_build>=0.12.12,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
