@@ -3,18 +3,21 @@ import uuid
 from fastapi import APIRouter, HTTPException
 
 from app.core.db import SessionDep
-from app.models import WorkOrderBase, WorkOrder
+from app.models import WorkOrderBase, WorkOrder, Location
 
 router = APIRouter(prefix="/work-orders", tags=["work-orders"])
 
 @router.post("")
-def Create_work_order(work_order_in: WorkOrderBase, 
+def create_work_order(work_order_in: WorkOrderBase, 
                       session: SessionDep) -> WorkOrder: 
+    
+    location = session.get(Location, work_order_in.location_id)
+    if not location:
+        raise HTTPException(status_code=400, detail="Location not found")
     work_order = WorkOrder.model_validate(work_order_in)
     session.add(work_order)
     session.commit()
     session.refresh(work_order)
-
     return work_order
 
 @router.get("/{id}")

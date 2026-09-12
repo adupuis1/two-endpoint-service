@@ -1,7 +1,7 @@
 [project]
 name = "two-endpoint-service"
 version = "0.1.0"
-description = "Add your description here"
+description = "pre-cohort"
 readme = "README.md"
 authors = [
     { name = "Anatole Dupuis", email = "anatole.dupuis@gmail.com" }

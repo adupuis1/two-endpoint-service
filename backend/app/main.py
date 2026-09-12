@@ -5,12 +5,12 @@ from fastapi.responses import JSONResponse
 
 from app.config import settings
 from app.core.db import create_db_and_tables
-from app.api.routes import work_orders
+from app.api.main import api_router
 
 app = FastAPI(title=settings.PROJECT_NAME)
 
 create_db_and_tables()
-app.include_router(work_orders.router)
+app.include_router(api_router)
 
 
 @app.exception_handler(RequestValidationError)
