@@ -1,19 +1,21 @@
 services:
 
   db: 
-    image: postgres_16
+    image: postgres:16
     environment:
-      POSTGRESS_PASSWORD: dev
+      POSTGRES_PASSWORD: dev
     volumes:
       - db-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready - U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 30s
       retries: 5
     
   backend:
-    build: .
+    build: 
+      context: .
+      dockerfile: backend/Dockerfile
     environment:
       DATABASE_URL: postgresql+psycopg://postgres:dev@db:5432/postgres
     ports:
